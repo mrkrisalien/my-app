@@ -1,8 +1,8 @@
 import React from 'react'
 
-const TemplateB = ({Landingpage}) => {
+const TemplateB = ({copyContent}) => {
     return (
-<div className="brandalert" id="app" ref={elementRef}>
+<div className="brandalert" id="app">
     <div className="brandalert__header">
         <div className="brandalert__medscape-header">
             <div className="flexbox">

@@ -7,8 +7,6 @@ import './Templates/style.css';
 
 const Landingpage = () => {
     const [selected, setSelected] = useState();
-    const inputRef = useRef(null);
-    const copyingTextRef = useRef(null);
     const elementRef = useRef(null);
     
 
@@ -16,19 +14,7 @@ const Landingpage = () => {
         // console.log(e.target.value);
         setSelected(e.target.value);
     };
-    const copyToClipboard = async () => {
-        const text = inputRef.current.outerHTML;
-        copyingTextRef.current.value = text;
 
-        copyingTextRef.current.select();
-
-        try {
-            await navigator.clipboard.writeText(text);
-            console.log("Text copied to clipboard");
-        } catch (error) {
-            console.error("Failed to copy text to clipboard", error);
-        }
-    };
     const copyHtmlToClipboard = async () => {
         const element = elementRef.current;
         
@@ -48,9 +34,7 @@ const Landingpage = () => {
       };
     return (
         <div>
-<TemplateB Landingpage={Landingpage} />
-
-            <div className="task-manager">
+            <div className="task-manager" >
                 <div className="left-bar">
                     <div className="upper-part">
                         <div className="actions">
@@ -88,6 +72,7 @@ const Landingpage = () => {
                 </div>
                 <div className="page-content">
                     <div className="header">Select from the dropdown for the templetes</div>
+                    
                     <select value={selected} onChange={(e) => handleChange(e)}>
                         <option> Please Select</option>
                         <option value="1">First Templete</option>
@@ -98,14 +83,8 @@ const Landingpage = () => {
 
                     <div className="">
                         {selected === "1" ? <TemplateA /> : ""}
-                        {selected === "2" ? <TemplateB /> : ""}
+                        {selected === "2" ? <TemplateB copyContent = {copyHtmlToClipboard}/> : ""}
                         {selected === "3" ? <TemplateC /> : ""}
-                    </div>
-
-                    <div>
-                        <input id="myInput" type="text" ref={inputRef} />
-                        <textarea id="copyingText" ref={copyingTextRef}></textarea>
-                        <button onClick={copyToClipboard}>Copy Text</button>
                     </div>
 
                     <button onClick={copyHtmlToClipboard}>Copy HTML</button>
